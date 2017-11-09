@@ -4,6 +4,7 @@ import 'babel-polyfill';
 import redis from 'redis';
 import axios from 'axios';
 import OpenSecretsCall from '../opensecrets-api';
+import { apiRouter } from './routes';
 
 // Dotenv config
 dotenv.config();
@@ -29,7 +30,10 @@ const port = process.env.PORT || 8080;
 //     });
 // });
 
-// Error logging middleware
+// Init routing middleware
+app.use('/api', apiRouter);
+
+// Init error logging middleware
 app.use((err, req, res, next) => {
   console.log(`Error: \nMessage: ${err.message}`);
 });
