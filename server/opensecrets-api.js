@@ -12,10 +12,6 @@ var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
 
-var _es6Promise = require('es6-promise');
-
-var _es6Promise2 = _interopRequireDefault(_es6Promise);
-
 require('isomorphic-fetch');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26,9 +22,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // Config dotenv
 _dotenv2.default.config();
-
-// Init es-6 promise
-_es6Promise2.default.polyfill();
 
 // Define api call class
 
@@ -52,7 +45,7 @@ var OpenSecretsCall = function () {
       var output = this.output;
       var validVals = ['json', 'xml'];
       if (validVals.indexOf(output) === -1) {
-        throw new TypeError('Whoops! Output value is invalid');
+        throw new Error('Whoops! Output value is invalid');
       } else {
         return output;
       }
@@ -65,7 +58,7 @@ var OpenSecretsCall = function () {
     value: function checkApiKey() {
       var apikey = this.apikey;
       if (!apikey) {
-        throw new TypeError('Whoops! OpenSecrets API key required');
+        throw new Error('Whoops! OpenSecrets API key required');
       } else {
         return apikey;
       }
@@ -108,6 +101,7 @@ var OpenSecretsCall = function () {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // Call initUrl()
                 url = this.initUrl();
 
                 // Handle fetch response status
@@ -120,7 +114,7 @@ var OpenSecretsCall = function () {
                   }
                 };
 
-                // Handle fetch response JSON parsing
+                // Handle fetch response JSON
 
 
                 json = function json(response) {
@@ -137,7 +131,7 @@ var OpenSecretsCall = function () {
                 // Fetch API
 
 
-                initFetch = new _es6Promise2.default(function (resolve, reject) {
+                initFetch = new Promise(function (resolve, reject) {
                   if (typeof url !== 'undefined' && _this.output === 'json') {
                     // JSON
                     fetch(url).then(status).then(json).then(function (data) {
@@ -164,22 +158,20 @@ var OpenSecretsCall = function () {
 
               case 8:
                 result = _context.sent;
-
-                console.log(result);
                 return _context.abrupt('return', result);
 
-              case 13:
-                _context.prev = 13;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context['catch'](5);
 
                 console.log(_context.t0);
 
-              case 16:
+              case 15:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this, [[5, 13]]);
+        }, _callee, this, [[5, 12]]);
       }));
 
       function fetchData() {
@@ -193,11 +185,4 @@ var OpenSecretsCall = function () {
   return OpenSecretsCall;
 }();
 
-// Test api call
-
-// const getLegislators = new OpenSecretsCall('getLegislators', 'NJ');
-// getLegislators.fetchData();
-
 exports.default = OpenSecretsCall;
-var candSummary = new OpenSecretsCall('candSummary', { cid: 'N00007360', cycle: '2012' });
-candSummary.fetchData();
