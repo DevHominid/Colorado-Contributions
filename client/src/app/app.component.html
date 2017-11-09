@@ -1,6 +1,21 @@
 <header>
-  <li><a routerLink="/">Home</a></li>
-  <li><a routerLink="/congress">Congress</a></li>
-  <li><a routerLink="/senate">Senate</a></li>
+  <nav>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/congress">Congress</a></li>
+    <li><a routerLink="/senate">Senate</a></li>
+  </nav>
 </header>
-<router-outlet></router-outlet>
+<section class="section-center">
+  <aside>
+    <i class="fa fa-2x fa-github-square" aria-hidden="true"></i>
+    <i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i>
+  </aside>
+  <router-outlet></router-outlet>
+</section>
+<footer>
+  <div>
+    <span>&copy; 2017</span>
+    <a><img class="signature" src="assets/images/signature.png" alt="Dev Hominid signature"></a>
+  </div>
+  <a><img class="credit" src="assets/images/opensecrets-credit.gif"></a>
+</footer>

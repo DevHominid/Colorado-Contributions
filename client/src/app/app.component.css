@@ -1,19 +1,74 @@
 header {
+  width: 80vw;
+  height: 12vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 80vw;
-  height: 15vh;
-
-  background: #d8d8d8;
+  width: 100%;
+  height: 100%;
 }
 
-header li {
-  margin-left: 1.25rem; /* 20 ÷ 16 */
+header nav li {
+  margin-left: 2.500rem; /* 40 ÷ 16 */
   list-style: none;
 }
 
-header li a {
+header nav li a {
   font-size: 2.25em; /* 36 ÷ 16 */
   text-decoration: none;
+  color: #011638;
+}
+
+.section-center {
+  display: flex;
+  flex-direction: row;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10vw;
+}
+
+aside i {
+  margin-top: 2.500rem; /* 40 ÷ 16 */
+  color: #FE5F55;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+  height: 12vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 2.500rem; /* 40 ÷ 16 */
+}
+
+footer div span {
+  font-size: 2.25em; /* 36 ÷ 16 */
+}
+
+.signature {
+  width: 200px;
+  margin-left: 2.500rem; /* 40 ÷ 16 */
+}
+
+.credit {
+  width: 160px;
+  margin-right: 2.500rem; /* 40 ÷ 16 */
 }

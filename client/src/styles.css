@@ -2,3 +2,10 @@
 body {
   font-family: 'Economica', sans-serif;
 }
+
+.section-main {
+  width: 80vw;
+  height: 76vh;
+
+  background: #888;
+}
