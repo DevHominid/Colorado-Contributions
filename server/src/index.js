@@ -1,19 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import 'babel-polyfill';
-import redis from 'redis';
 import axios from 'axios';
 import OpenSecretsCall from '../opensecrets-api';
 import { apiRouter } from './routes';
 
 // Dotenv config
 dotenv.config();
-
-// Create new redis client and connect to redis instance
-const redisClient = redis.createClient();
-redisClient.on('error', (err) => {
-  console.log(`Error: ${err}`);
-});
 
 // Init app
 const app = express();
