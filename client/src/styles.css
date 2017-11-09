@@ -6,6 +6,7 @@ body {
 .section-main {
   width: 80vw;
   height: 76vh;
+  overflow: hidden;
 
   background: #888;
 }
