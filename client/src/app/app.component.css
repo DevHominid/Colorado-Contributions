@@ -1,0 +1,19 @@
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80vw;
+  height: 15vh;
+
+  background: #d8d8d8;
+}
+
+header li {
+  margin-left: 1.25rem; /* 20 ÷ 16 */
+  list-style: none;
+}
+
+header li a {
+  font-size: 2.25em; /* 36 ÷ 16 */
+  text-decoration: none;
+}
