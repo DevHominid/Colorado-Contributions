@@ -14,18 +14,23 @@ redisClient.on('error', (err) => {
  * @return {Promise<Object>}
  */
  const findLegislators = (keys) => new Promise((resolve, reject) => {
-   const legislators = keys.map((key) => {
-     return redisClient.hgetall(key, (err, response) => {
-       if (err) {
-         reject(err);
-       } else {
-         console.log(`response: ${response}`);
-         return response;
-       }
+   const legislators = Promise.all(keys.map((key) => {
+     return new Promise((resolve, reject) => {
+       redisClient.hgetall(key, (err, response) => {
+         if (err) {
+           reject(err);
+         } else {
+           resolve(response);
+         }
+       });
      });
+   }))
+   .then((legislators) => {
+     resolve(legislators);
+   })
+   .catch((err) => {
+     reject(err);
    });
-   console.log(legislators);
-   resolve(legislators);
  });
 
  /**
