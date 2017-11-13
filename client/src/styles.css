@@ -10,3 +10,53 @@ body {
 
   background: #888;
 }
+
+.heading-side {
+  width: 20%;
+  height: 100%;
+  padding-left: 1.250em;
+  background: url("/assets/images/side-cover.jpg");
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.legis-wrapper {
+  width: 80%;
+  overflow-y: scroll;
+}
+
+.legis-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.legis-img {
+  width: 150px;
+  height: 150px;
+}
+
+.legis-info {
+  width: calc(100% - 150px);
+  background: #EEF5DB;
+  padding: 1.250em 0 0 2.50em;
+}
+
+.legis-name {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.legis-party {
+  font-size: 1.250em;
+  font-weight: 700;
+}
+
+.vertical-text {
+  text-transform: uppercase;
+  width: 1em;
+  word-wrap: break-word;
+  font-size: 40px;
+  letter-spacing: 40px;
+  color: #EEF5DB;
+  font-weight: 400;
+}

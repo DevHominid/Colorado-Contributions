@@ -8,9 +8,11 @@ import { DataService } from '../../services/data.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CongressComponent implements OnInit {
+  title: string;
+  congress: Legislator[];
 
   constructor(private dataService: DataService) {
-
+    this.title = 'congress';
   }
 
   ngOnInit() {
@@ -22,9 +24,17 @@ export class CongressComponent implements OnInit {
           return legislator;
         }
       });
-
+      this.congress = congress;
       console.log(congress);
     });
   }
 
+}
+
+interface Legislator {
+  cid: string,
+  firstlast: string,
+  party: string,
+  gender: string,
+  elected: string
 }
