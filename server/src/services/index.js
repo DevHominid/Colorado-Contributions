@@ -50,6 +50,9 @@ const getLegislators = (id) => new Promise((resolve, reject) => {
      .then((data) => {
        const candInd = data.response.industries;
        const industries = candInd.industry;
+       const industryKeys = industries.map((industry) => {
+         return `indCodes:${industry["@attributes"].industry_code}`;
+       });
        const candInfo = {
          name: candInd["@attributes"].cand_name,
          cid: candInd["@attributes"].cid,
@@ -67,7 +70,7 @@ const getLegislators = (id) => new Promise((resolve, reject) => {
          };
          return item;
        });
-       const result = [candInfo, industryArray];
+       const result = [industryKeys, candInfo, industryArray];
        resolve(result);
      })
      .catch((err) => {

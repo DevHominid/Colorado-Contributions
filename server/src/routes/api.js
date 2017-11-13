@@ -1,5 +1,5 @@
 import express from 'express';
-import { findLegislators, findLegislatorKeys, cacheLegislators, cacheLegislatorKeys } from '../database';
+import { findLegislators, findLegislatorKeys, cacheKeys, cacheLegislators } from '../database';
 import { getLegislators, getCandIndustry } from '../services';
 
 const router = express.Router();
@@ -45,6 +45,9 @@ router.get('/candidate/:cid/industries/:cycle', (req, res, next) => {
 
   getCandIndustry(cid, cycle)
     .then((result) => {
+      return Promise.all([cacheKeys(cid, result[0]),
+                          cacheCandInfo(result[1]),
+                          cacheCandIndustry(result[2])]);
       res.send({'candIndustry': result, 'source': 'OpenSecrets API'});
     })
     .catch((err) => {

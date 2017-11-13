@@ -50,15 +50,15 @@ redisClient.on('error', (err) => {
  });
 
   /**
-   * Store legislator keys in the cache
+   * Store array of keys in the cache
    *
-   * @param  {Object} key
-   * @param  {Object} legislatorKeys
-   * @return {Promise<Object>}
+   * @param  {String} key
+   * @param  {Array} keys
+   * @return {Promise<Array>}
    */
-   const cacheLegislatorKeys = (key, legislatorKeys) => new Promise((resolve, reject) => {
-     redisClient.setex(key, 30, JSON.stringify(legislatorKeys));
-     resolve(legislatorKeys);
+   const cacheKeys = (key, keys) => new Promise((resolve, reject) => {
+     redisClient.setex(key, 30, JSON.stringify(keys));
+     resolve(keys);
    });
 
  /**
@@ -109,4 +109,12 @@ redisClient.on('error', (err) => {
      resolve(industryArray);
    });
 
- export { findLegislator, findLegislators, findLegislatorKeys, cacheLegislators, cacheLegislatorKeys };
+ export {
+   findLegislatorKeys,
+   findLegislator,
+   findLegislators,
+   cacheKeys,
+   cacheLegislators,
+   cacheCandInfo,
+   cacheCandIndustry
+ };
