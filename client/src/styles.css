@@ -12,12 +12,25 @@ body {
 }
 
 .heading-side {
+  position: relative;
   width: 20%;
   height: 100%;
   padding-left: 1.250em;
   background: url("/assets/images/side-cover.jpg");
   background-size: cover;
   background-position: 50% 50%;
+}
+
+.heading-side::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #FE5F55;
+  mix-blend-mode: darken;
 }
 
 .legis-wrapper {
@@ -29,30 +42,71 @@ body {
   display: flex;
   flex-direction: row;
   text-decoration: none;
+  color: #011638;
 }
 
 .legis-img {
+  position: relative;
   width: 150px;
   height: 150px;
 }
 
+.legis-img::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: #C7EFCF;
+  opacity: .64;
+  transition: all 0.7s ease-out;
+}
+
+.legis-box:hover .legis-img::after {
+  height: 0px;
+  width: 0%;
+}
+
 .legis-info {
+  position: relative;
   width: calc(100% - 150px);
   background: #EEF5DB;
   padding: 1.250em 0 0 2.50em;
 }
 
+.legis-info::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #F0B67F;
+  transition: width 0.7s ease-out;
+}
+
+.legis-box:hover .legis-info::after {
+  width: 100%;
+}
+
 .legis-name {
+  position: relative;
+  z-index: 2;
   font-size: 1.5em;
   font-weight: 700;
 }
 
 .legis-party {
+  position: relative;
+  z-index: 2;
   font-size: 1.250em;
   font-weight: 700;
 }
 
 .vertical-text {
+  position: relative;
   text-transform: uppercase;
   width: 1em;
   word-wrap: break-word;
