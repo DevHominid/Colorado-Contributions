@@ -28,6 +28,7 @@ body {
 .legis-box {
   display: flex;
   flex-direction: row;
+  text-decoration: none;
 }
 
 .legis-img {

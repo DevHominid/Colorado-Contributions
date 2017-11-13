@@ -3,12 +3,12 @@
     <h1 class="vertical-text">{{title}}</h1>
   </div>
   <div class="legis-wrapper">
-    <div *ngFor="let legis of congress" class="legis-box">
+    <a *ngFor="let legis of congress" class="legis-box" routerLink="/congress/legislator/{{legis.cid}}">
       <img class="legis-img" src="../../assets/images/legis-img-default.png">
       <div class="legis-info">
         <p class="legis-name">{{legis.firstlast}}</p>
         <p class="legis-party">{{legis.party}}</p>
       </div>
-    </div>
+    </a>
   </div>
 </section>
