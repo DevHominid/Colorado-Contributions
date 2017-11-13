@@ -4,30 +4,9 @@ import { getLegislators } from '../services';
 
 const router = express.Router();
 
-// router.get('/legislators/:id', (req, res, next) => {
-//   const id = req.params.id;
-//
-//   findLegislators(id)
-//     .then((legislators) => {
-//       if (legislators) {
-//         res.send({ "legislators": legislators, "source": "redis cache" });
-//       } else {
-//         const query = { id: id};
-//         getLegislators(query)
-//           .then((legislators) => {
-//             cacheLegislators(id, legislators)
-//               .then((legislators) => {
-//                 res.send({"legislators": legislators, "source": "OpenSecrets API" });
-//               })
-//           })
-//       }
-//     })
-//     .catch((err) => {
-//       res.status.send(500).send(err.message);
-//       next(err);
-//     });
-// });
-
+// fetch legislators keys from cache
+// if keys found, fetch legislators from cache and send as res
+// else, fetch legislators + keys from API, store in cache, and send as res
 router.get('/legislators/:id', (req, res, next) => {
   const id = req.params.id;
 
