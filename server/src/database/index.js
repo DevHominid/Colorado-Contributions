@@ -65,7 +65,7 @@ redisClient.on('error', (err) => {
   * Store legislators in the cache
   *
   * @param  {Array} legislators
-  * @return {Promise<Array>}
+  * @return {Promise<Object>}
   */
   const cacheLegislators = (legislators) => new Promise((resolve, reject) => {
     legislators.forEach((legislator) => {
@@ -89,8 +89,8 @@ redisClient.on('error', (err) => {
      redisClient.hmset(`candInfo:${candInfo.cid}`, 'name', candInfo.name,
                        'cid', candInfo.cid, 'cycle', candInfo.cycle,
                        'source', candInfo.source, 'lastUpdated', candInfo.lastUpdated);
-     redisClient.expire(`candInfo:${candInfo.cid}`, 30);
-     resolve(industryArray);
+     redisClient.expire(`candInfo:${candInfo.code}`, 30);
+     resolve(candInfo);
    });
 
   /**
@@ -100,7 +100,7 @@ redisClient.on('error', (err) => {
    * @return {Promise<Object>}
    */
    const cacheCandIndustry = (industryArray) => new Promise((resolve, reject) => {
-     industryArray.forEach((industry) => {
+     industries.forEach((industry) => {
        redisClient.hmset(`candIndustry:${industry.code}`, 'code', industry.code,
                          'name', industry.name, 'indivs', industry.indivs,
                          'pacs', industry.pacs, 'total', industry.total);
@@ -109,4 +109,4 @@ redisClient.on('error', (err) => {
      resolve(industryArray);
    });
 
- export { findLegislator, findLegislators, findLegislatorKeys, cacheLegislators, cacheLegislatorKeys, cacheCandInfo, cacheCandIndustry };
+ export { findLegislator, findLegislators, findLegislatorKeys, cacheLegislators, cacheLegislatorKeys };
