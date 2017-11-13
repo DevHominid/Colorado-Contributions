@@ -1,5 +1,13 @@
 import express from 'express';
-import { findLegislators, findLegislatorKeys, cacheKeys, cacheLegislators } from '../database';
+import {
+  findKeys,
+  findOne,
+  findMultiple,
+  cacheKeys,
+  cacheLegislators,
+  cacheCandInfo,
+  cacheCandIndustry
+} from '../database';
 import { getLegislators, getCandIndustry } from '../services';
 
 const router = express.Router();
@@ -10,10 +18,10 @@ const router = express.Router();
 router.get('/legislators/:id', (req, res, next) => {
   const id = req.params.id;
 
-  findLegislatorKeys(id)
+  findKeys(id)
     .then((keys) => {
       if (keys) {
-        findLegislators(JSON.parse(keys))
+        findMultiple(JSON.parse(keys))
           .then((legislators) => {
             if (legislators) {
               res.send({ 'legislators': legislators, 'source': 'redis cache' });
@@ -26,7 +34,7 @@ router.get('/legislators/:id', (req, res, next) => {
 
         getLegislators(query)
           .then((result) => {
-            return Promise.all([cacheLegislators(result[1]), cacheLegislatorKeys(id, result[0])]);
+            return Promise.all([cacheLegislators(result[1]), cacheKeys(id, result[0])]);
           })
           .then((result) => {
             res.send({'legislators': result[0], 'source': 'OpenSecrets API'});
@@ -42,13 +50,34 @@ router.get('/legislators/:id', (req, res, next) => {
 router.get('/candidate/:cid/industries/:cycle', (req, res, next) => {
   const cid = req.params.cid;
   const cycle = req.params.cycle;
+  const key = cid + cycle;
 
-  getCandIndustry(cid, cycle)
-    .then((result) => {
-      return Promise.all([cacheKeys(cid, result[0]),
-                          cacheCandInfo(result[1]),
-                          cacheCandIndustry(result[2])]);
-      res.send({'candIndustry': result, 'source': 'OpenSecrets API'});
+  findKeys(key)
+    .then((keys) => {
+      if (keys) {
+        Promise.all([findOne(`candInfo:${cid}`), findMultiple(JSON.parse(keys))])
+          .then((result) => {
+            res.send({ 'candInfo': result[0], 'candIndustry': result[1], 'source': 'redis cache'});
+          })
+          .catch((err) => {
+            res.status(500).send(err.message);
+            next(err);
+          })
+      } else {
+        getCandIndustry(cid, cycle)
+          .then((result) => {
+            return Promise.all([cacheKeys(key, result[0]),
+                                cacheCandInfo(result[1]),
+                                cacheCandIndustry(result[2])]);
+          })
+          .then((result) => {
+            res.send({ 'candInfo': result[1], 'candIndustry': result[2], 'source': 'OpenSecrets API'});
+          })
+          .catch((err) => {
+            res.status(500).send(err.message);
+            next(err);
+          });
+      }
     })
     .catch((err) => {
       res.status(500).send(err.message);

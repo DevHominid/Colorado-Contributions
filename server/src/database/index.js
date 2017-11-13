@@ -8,41 +8,41 @@ redisClient.on('error', (err) => {
 });
 
 /**
- * Fetch legislator keys from the cache
+ * Fetch keys array from the cache
  *
  * @param  {String} key
  * @return {Promise<Object>}
  */
- const findLegislatorKeys = (key) => new Promise((resolve, reject) => {
+ const findKeys = (key) => new Promise((resolve, reject) => {
    redisClient.get(key, (err, keys) => {
      err ? reject(err) : resolve(keys)
    });
  });
 
 /**
- * Fetch a single legislator from the cache by key
+ * Fetch a single object from the cache by key
  *
  * @param  {String} key
  * @return {Promise<Object>}
  */
- const findLegislator = (key) => new Promise((resolve, reject) => {
-   redisClient.hgetall(key, (err, legislator) => {
-     err ? reject(err) : resolve(legislator)
+ const findOne = (key) => new Promise((resolve, reject) => {
+   redisClient.hgetall(key, (err, item) => {
+     err ? reject(err) : resolve(item)
    });
  });
 
 /**
- * Fetch multiple legislators from the cache by keys
+ * Fetch multiple objects from the cache by keys
  *
  * @param  {Array} keys
  * @return {Promise<Object>}
  */
- const findLegislators = (keys) => new Promise((resolve, reject) => {
-   const legislators = Promise.all(keys.map((key) => {
-     return findLegislator(key);
+ const findMultiple = (keys) => new Promise((resolve, reject) => {
+   const items = Promise.all(keys.map((key) => {
+     return findOne(key);
    }))
-   .then((legislators) => {
-     resolve(legislators);
+   .then((items) => {
+     resolve(items);
    })
    .catch((err) => {
      reject(err);
@@ -100,7 +100,7 @@ redisClient.on('error', (err) => {
    * @return {Promise<Object>}
    */
    const cacheCandIndustry = (industryArray) => new Promise((resolve, reject) => {
-     industries.forEach((industry) => {
+     industryArray.forEach((industry) => {
        redisClient.hmset(`candIndustry:${industry.code}`, 'code', industry.code,
                          'name', industry.name, 'indivs', industry.indivs,
                          'pacs', industry.pacs, 'total', industry.total);
@@ -110,9 +110,9 @@ redisClient.on('error', (err) => {
    });
 
  export {
-   findLegislatorKeys,
-   findLegislator,
-   findLegislators,
+   findKeys,
+   findOne,
+   findMultiple,
    cacheKeys,
    cacheLegislators,
    cacheCandInfo,

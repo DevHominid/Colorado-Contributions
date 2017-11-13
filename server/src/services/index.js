@@ -51,7 +51,7 @@ const getLegislators = (id) => new Promise((resolve, reject) => {
        const candInd = data.response.industries;
        const industries = candInd.industry;
        const industryKeys = industries.map((industry) => {
-         return `indCodes:${industry["@attributes"].industry_code}`;
+         return `candIndustry:${industry["@attributes"].industry_code}`;
        });
        const candInfo = {
          name: candInd["@attributes"].cand_name,
