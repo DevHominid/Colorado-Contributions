@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-congress',
@@ -8,9 +9,22 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class CongressComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+
+  }
 
   ngOnInit() {
+    this.dataService.getLegislators().subscribe((data) => {
+      const congress = data.legislators.filter((legislator) => {
+        const re = new RegExp('house', 'i');
+        const office = legislator.congressoffice;
+        if (re.test(office)) {
+          return legislator;
+        }
+      });
+
+      console.log(congress);
+    });
   }
 
 }
