@@ -24,11 +24,15 @@ router.get('/legislators/:id', (req, res, next) => {
         findMultiple(JSON.parse(keys))
           .then((legislators) => {
             if (legislators) {
-              res.send({ 'legislators': legislators, 'source': 'redis cache' });
+              res.json({ 'legislators': legislators, 'source': 'redis cache' });
             } else {
               console.log('resources not found');
             }
           })
+          .catch((err) => {
+            res.status(500).send(err.message);
+            next(err);
+          });
       } else {
         const query = { id: id };
 
@@ -37,8 +41,12 @@ router.get('/legislators/:id', (req, res, next) => {
             return Promise.all([cacheLegislators(result[1]), cacheKeys(id, result[0])]);
           })
           .then((result) => {
-            res.send({'legislators': result[0], 'source': 'OpenSecrets API'});
+            res.json({'legislators': result[0], 'source': 'OpenSecrets API'});
           })
+          .catch((err) => {
+            res.status(500).send(err.message);
+            next(err);
+          });
       }
     })
     .catch((err) => {
@@ -57,7 +65,7 @@ router.get('/candidate/:cid/industries/:cycle', (req, res, next) => {
       if (keys) {
         Promise.all([findOne(`candInfo:${cid}`), findMultiple(JSON.parse(keys))])
           .then((result) => {
-            res.send({ 'candInfo': result[0], 'candIndustry': result[1], 'source': 'redis cache'});
+            res.json({ 'candInfo': result[0], 'candIndustry': result[1], 'source': 'redis cache'});
           })
           .catch((err) => {
             res.status(500).send(err.message);
@@ -68,10 +76,10 @@ router.get('/candidate/:cid/industries/:cycle', (req, res, next) => {
           .then((result) => {
             return Promise.all([cacheKeys(key, result[0]),
                                 cacheCandInfo(result[1]),
-                                cacheCandIndustry(result[2])]);
+                                cacheCandIndustry(key, result[2])]);
           })
           .then((result) => {
-            res.send({ 'candInfo': result[1], 'candIndustry': result[2], 'source': 'OpenSecrets API'});
+            res.json({ 'candInfo': result[1], 'candIndustry': result[2], 'source': 'OpenSecrets API'});
           })
           .catch((err) => {
             res.status(500).send(err.message);

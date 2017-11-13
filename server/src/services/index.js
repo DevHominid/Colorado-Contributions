@@ -40,7 +40,7 @@ const getLegislators = (id) => new Promise((resolve, reject) => {
  * Fetch candidate industries from API by cid and cycle
  *
  * @param  {String} cid
- * @param  {String} cycle (optional) (2012, 2014, 2016, 2018)
+ * @param  {String} cycle (2012, 2014, 2016, 2018)
  * @return {Promise<Object>}
  */
 
@@ -51,7 +51,7 @@ const getLegislators = (id) => new Promise((resolve, reject) => {
        const candInd = data.response.industries;
        const industries = candInd.industry;
        const industryKeys = industries.map((industry) => {
-         return `candIndustry:${industry["@attributes"].industry_code}`;
+         return `candIndustry:${cid}${cycle}${industry["@attributes"].industry_code}`;
        });
        const candInfo = {
          name: candInd["@attributes"].cand_name,

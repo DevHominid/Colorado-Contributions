@@ -99,9 +99,9 @@ redisClient.on('error', (err) => {
    * @param  {Array} industryArray
    * @return {Promise<Object>}
    */
-   const cacheCandIndustry = (industryArray) => new Promise((resolve, reject) => {
+   const cacheCandIndustry = (key, industryArray) => new Promise((resolve, reject) => {
      industryArray.forEach((industry) => {
-       redisClient.hmset(`candIndustry:${industry.code}`, 'code', industry.code,
+       redisClient.hmset(`candIndustry:${key}${industry.code}`, 'code', industry.code,
                          'name', industry.name, 'indivs', industry.indivs,
                          'pacs', industry.pacs, 'total', industry.total);
        redisClient.expire(`candIndustry:${industry.code}`, 30);
