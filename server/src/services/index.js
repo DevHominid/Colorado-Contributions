@@ -1,6 +1,7 @@
 import OpenSecretsCall from '../../opensecrets-api';
+
 /**
- * Fetch legislators by id
+ * Fetch legislators from API by id
  *
  * @param  {Object} id
  * @return {Promise<Object>}

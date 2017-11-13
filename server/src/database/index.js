@@ -8,22 +8,26 @@ redisClient.on('error', (err) => {
 });
 
 /**
- * Fetch legislators from the cache
+ * Fetch a single legislator from the cache by key
  *
- * @param  {String} id
+ * @param  {String} key
+ * @return {Promise<Object>}
+ */
+ const findLegislator = (key) => new Promise((resolve, reject) => {
+   redisClient.hgetall(key, (err, legislator) => {
+     err ? reject(err) : resolve(legislator)
+   });
+ });
+
+/**
+ * Fetch multiple legislators from the cache by keys
+ *
+ * @param  {Array} keys
  * @return {Promise<Object>}
  */
  const findLegislators = (keys) => new Promise((resolve, reject) => {
    const legislators = Promise.all(keys.map((key) => {
-     return new Promise((resolve, reject) => {
-       redisClient.hgetall(key, (err, response) => {
-         if (err) {
-           reject(err);
-         } else {
-           resolve(response);
-         }
-       });
-     });
+     return findLegislator(key);
    }))
    .then((legislators) => {
      resolve(legislators);
@@ -34,9 +38,9 @@ redisClient.on('error', (err) => {
  });
 
  /**
-  * Fetch legislators from the cache
+  * Fetch legislator keys from the cache
   *
-  * @param  {String} id
+  * @param  {String} key
   * @return {Promise<Object>}
   */
   const findLegislatorKeys = (key) => new Promise((resolve, reject) => {
@@ -48,7 +52,7 @@ redisClient.on('error', (err) => {
  /**
   * Store legislators in the cache
   *
-  * @param  {Object} id
+  * @param  {Array} legislators
   * @return {Promise<Object>}
   */
   const cacheLegislators = (legislators) => new Promise((resolve, reject) => {
@@ -64,9 +68,10 @@ redisClient.on('error', (err) => {
   });
 
   /**
-   * Store legislators in the cache
+   * Store legislator keys in the cache
    *
-   * @param  {Object} id
+   * @param  {Object} key
+   * @param  {Object} legislatorKeys
    * @return {Promise<Object>}
    */
    const cacheLegislatorKeys = (key, legislatorKeys) => new Promise((resolve, reject) => {
@@ -74,4 +79,4 @@ redisClient.on('error', (err) => {
      resolve(legislatorKeys);
    });
 
- export { findLegislators, findLegislatorKeys, cacheLegislators, cacheLegislatorKeys };
+ export { findLegislator, findLegislators, findLegislatorKeys, cacheLegislators, cacheLegislatorKeys };
