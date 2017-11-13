@@ -57,7 +57,7 @@ redisClient.on('error', (err) => {
    * @return {Promise<Array>}
    */
    const cacheKeys = (key, keys) => new Promise((resolve, reject) => {
-     redisClient.setex(key, 30, JSON.stringify(keys));
+     redisClient.setex(key, 300, JSON.stringify(keys));
      resolve(keys);
    });
 
@@ -74,7 +74,7 @@ redisClient.on('error', (err) => {
                         'gender', legislator.gender, 'elected', legislator.elected,
                         'twitterID', legislator.twitterID, 'congressoffice', legislator.congressoffice,
                         'birthdate', legislator.birthdate);
-      redisClient.expire(`legislators:${legislator.cid}`, 30);
+      redisClient.expire(`legislators:${legislator.cid}`, 300);
     });
     resolve(legislators);
   });
@@ -89,7 +89,7 @@ redisClient.on('error', (err) => {
      redisClient.hmset(`candInfo:${candInfo.cid}`, 'name', candInfo.name,
                        'cid', candInfo.cid, 'cycle', candInfo.cycle,
                        'source', candInfo.source, 'lastUpdated', candInfo.lastUpdated);
-     redisClient.expire(`candInfo:${candInfo.code}`, 30);
+     redisClient.expire(`candInfo:${candInfo.code}`, 300);
      resolve(candInfo);
    });
 
@@ -104,7 +104,7 @@ redisClient.on('error', (err) => {
        redisClient.hmset(`candIndustry:${key}${industry.code}`, 'code', industry.code,
                          'name', industry.name, 'indivs', industry.indivs,
                          'pacs', industry.pacs, 'total', industry.total);
-       redisClient.expire(`candIndustry:${industry.code}`, 30);
+       redisClient.expire(`candIndustry:${industry.code}`, 300);
      });
      resolve(industryArray);
    });
