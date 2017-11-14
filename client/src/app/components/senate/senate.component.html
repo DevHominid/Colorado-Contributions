@@ -1,3 +1,16 @@
-<section class="section-main">
-  senate works!
+<section class="section-main section-senate">
+  <div class="heading-side">
+    <h1 class="vertical-text">{{title}}</h1>
+  </div>
+  <div class="legis-wrapper">
+    <a *ngFor="let legis of senate" class="legis-box" routerLink="/senate/legislator/{{legis.cid}}">
+      <div class="legis-img">
+        <img src="../../assets/images/legis-img-default.png">
+      </div>
+      <div class="legis-info">
+        <p class="legis-name">{{legis.firstlast}}</p>
+        <p class="legis-party">{{legis.party}}</p>
+      </div>
+    </a>
+  </div>
 </section>

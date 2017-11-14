@@ -10,13 +10,13 @@ import { SenateComponent } from './components/senate/senate.component';
 import { LegislatorComponent } from './components/legislator/legislator.component';
 
 import { DataService } from './services/data.service';
-import { LegislatorComponent } from './components/legislator/legislator.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'congress', component: CongressComponent},
   {path: 'congress/legislator/:cid', component: LegislatorComponent},
-  {path: 'senate', component: SenateComponent}
+  {path: 'senate', component: SenateComponent},
+  {path: 'senate/legislator/:cid', component: LegislatorComponent}
 ];
 
 @NgModule({
