@@ -5,7 +5,7 @@ import { DataService } from '../../services/data.service';
   selector: 'app-senate',
   templateUrl: './senate.component.html',
   styleUrls: ['./senate.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class SenateComponent implements OnInit {
   title: string;
