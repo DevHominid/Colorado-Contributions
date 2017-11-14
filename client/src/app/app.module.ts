@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
+import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { CongressComponent } from './components/congress/congress.component';
@@ -10,14 +12,6 @@ import { SenateComponent } from './components/senate/senate.component';
 import { LegislatorComponent } from './components/legislator/legislator.component';
 
 import { DataService } from './services/data.service';
-
-const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'congress', component: CongressComponent},
-  {path: 'congress/legislator/:cid', component: LegislatorComponent},
-  {path: 'senate', component: SenateComponent},
-  {path: 'senate/legislator/:cid', component: LegislatorComponent}
-];
 
 @NgModule({
   declarations: [
@@ -30,9 +24,9 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
-  providers: [DataService],
-  bootstrap: [AppComponent]
+  providers: [ DataService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

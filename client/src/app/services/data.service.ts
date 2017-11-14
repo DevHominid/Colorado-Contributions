@@ -13,4 +13,9 @@ export class DataService {
     return this.http.get('http://localhost:8080/api/legislators/CO')
       .map(res => res.json());
   }
+
+  getCandIndustry(cid, cycle) {
+    return this.http.get('http://localhost:8080/api/candidate/:cid/industries/:cycle')
+      .map(res => res.json());
+  }
 }
