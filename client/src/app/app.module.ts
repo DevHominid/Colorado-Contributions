@@ -4,25 +4,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
 import { CongressModule } from './components/congress/congress.module';
+import { SenateModule } from './components/senate/senate.module';
 import { LegislatorModule } from './components/legislator/legislator.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { SenateComponent } from './components/senate/senate.component';
 
 import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    SenateComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     CongressModule,
+    SenateModule,
     LegislatorModule,
     AppRoutingModule
   ],
