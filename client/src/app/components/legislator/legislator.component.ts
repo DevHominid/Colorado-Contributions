@@ -10,6 +10,9 @@ import 'rxjs/add/operator/switchMap';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class LegislatorComponent implements OnInit {
+  dataRes: any;
+  cid: string;
+  cycle: string;
   candidate: Legislator[];
   industries: Industry[];
 
@@ -20,7 +23,15 @@ export class LegislatorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.route.paramMap.switchMap((params: ParamMap) => {
+      this.cid = params.get('cid');
+      this.cycle = '2018';
+      return this.service.getCandIndustry(this.cid, this.cycle);
+    })
+    .subscribe((data) => {
+      this.dataRes = data;
+      console.log(data);
+    })
   }
 
 }

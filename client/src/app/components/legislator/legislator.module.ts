@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { LegislatorComponent } from './legislator.component';
 
+import { DataService } from '../../services/data.service';
+
 @NgModule({
   imports: [
     CommonModule
@@ -12,6 +14,7 @@ import { LegislatorComponent } from './legislator.component';
   ],
   exports: [
     LegislatorComponent
-  ]
+  ],
+  providers: [ DataService ]
 })
 export class LegislatorModule {}
