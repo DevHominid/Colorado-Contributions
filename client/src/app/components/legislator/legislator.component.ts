@@ -20,17 +20,7 @@ export class LegislatorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.candidate = this.route.paramMap
-      .switchMap((params: ParamMap) => {
-        this.service.getLegislators().subscribe((data) => {
-          return data.legislators.filter((legislator) => {
-            if (params.get('cid') == legislator.cid) {
-              return legislator;
-            }
-          });
-        });
-      });
-      console.log(this.candidate);
+
   }
 
 }
