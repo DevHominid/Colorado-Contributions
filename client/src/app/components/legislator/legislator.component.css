@@ -66,3 +66,12 @@ article .container {
   border: none;
   padding: 0.625rem 0 0.625rem 0;
 }
+
+.industry-info-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.industry-info-wrapper div {
+  margin-left: 2.50rem; /* 40 ÷ 16 */
+}

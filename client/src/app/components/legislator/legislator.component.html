@@ -1,19 +1,19 @@
 <section class="section-main section-legislator">
   <aside>
     <img src="../../assets/images/legis-img-default.png">
-    <h1>First Last</h1>
+    <h1>{{candInfo.name}}</h1>
     <div class="details-box">
       <div class="details-item">
-        <span class="details-label">Party:</span>
-        <span class="details-value">D</span>
+        <span class="details-label">Cycle:</span>
+        <span class="details-value">{{candInfo.cycle}}</span>
       </div>
       <div class="details-item">
-        <span class="details-label">Gender:</span>
-        <span class="details-value">F</span>
+        <span class="details-label">Updated:</span>
+        <span class="details-value">{{candInfo.lastUpdated}}</span>
       </div>
       <div class="details-item">
-        <span class="details-label">Elected:</span>
-        <span class="details-value">2012</span>
+        <span class="details-label">Source:</span>
+        <span class="details-value"><a href="{{candInfo.source}}" target="_blank">OpenSecrets</a></span>
       </div>
     </div>
   </aside>
@@ -28,6 +28,19 @@
         <button>2018</button>
       </div>
       <h1>Industries</h1>
+      <div *ngFor="let industry of industries; index as i">
+        <p>{{i + 1}}) {{industry.name}}</p>
+        <div class="industry-info-wrapper">
+          <div>
+            <p>Code: {{industry.code}}</p>
+            <p>Total: {{industry.total}}</p>
+          </div>
+          <div>
+            <p>Indivs: {{industry.indivs}}</p>
+            <p>Pacs: {{industry.pacs}}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </article>
 </section>

@@ -13,8 +13,8 @@ export class LegislatorComponent implements OnInit {
   dataRes: any;
   cid: string;
   cycle: string;
-  candidate: Legislator[];
   industries: Industry[];
+  candInfo: CandInfo;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,18 +30,14 @@ export class LegislatorComponent implements OnInit {
     })
     .subscribe((data) => {
       this.dataRes = data;
+      this.industries = data.candIndustry;
+      this.candInfo = data.candInfo;
       console.log(data);
+      console.log(this.industries);
+      console.log(this.candInfo);
     })
   }
 
-}
-
-interface Legislator {
-  cid: string,
-  firstlast: string,
-  party: string,
-  gender: string,
-  elected: string
 }
 
 interface Industry {
@@ -50,4 +46,12 @@ interface Industry {
   indivs: string,
   pacs: string,
   total: string
+}
+
+interface CandInfo {
+  cid: string,
+  lastUpdated: string,
+  name: string,
+  source: string,
+  cycle: string
 }
