@@ -50,8 +50,8 @@ interface Industry {
 
 interface CandInfo {
   cid: string,
+  cycle: string,
   lastUpdated: string,
   name: string,
   source: string,
-  cycle: string
 }
