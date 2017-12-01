@@ -22,10 +22,10 @@
       <div class="chart">
       </div>
       <div class="btn-wrapper">
-        <button>2012</button>
-        <button>2014</button>
-        <button>2016</button>
-        <button>2018</button>
+        <button class="btn-cycle" (click)="onBtnCycleClick($event)">2012</button>
+        <button class="btn-cycle" (click)="onBtnCycleClick($event)">2014</button>
+        <button class="btn-cycle" (click)="onBtnCycleClick($event)">2016</button>
+        <button class="btn-cycle" (click)="onBtnCycleClick($event)">2018</button>
       </div>
       <h1>Industries</h1>
       <div *ngFor="let industry of industries; index as i">

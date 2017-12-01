@@ -38,6 +38,19 @@ export class LegislatorComponent implements OnInit {
     })
   }
 
+  onBtnCycleClick(event) {
+    const cycle = event.target.innerText;
+    this.service.getCandIndustry(this.cid, cycle).subscribe((data) => {
+      this.dataRes = data;
+      this.industries = data.candIndustry;
+      this.candInfo = data.candInfo;
+      this.cycle = cycle;
+      console.log(data);
+      console.log(this.industries);
+      console.log(this.candInfo);
+    })
+  }
+
 }
 
 interface Industry {
