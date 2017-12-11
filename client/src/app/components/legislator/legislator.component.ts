@@ -15,6 +15,7 @@ export class LegislatorComponent implements OnInit {
   cycle: string;
   industries: Industry[];
   candInfo: CandInfo;
+  private chartData: Array<any>;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,9 @@ export class LegislatorComponent implements OnInit {
       console.log(data);
       console.log(this.industries);
       console.log(this.candInfo);
+
+      this.generateData();
+      setInterval(() => this.generateData(), 3000);
     })
   }
 
@@ -48,10 +52,18 @@ export class LegislatorComponent implements OnInit {
       console.log(data);
       console.log(this.industries);
       console.log(this.candInfo);
-    })
+    }
   }
 
-}
+  generateData() {
+    this.chartData = [];
+    for (let i = 0; i < (8 + Math.floor(Math.random() * 10)); i++) {
+      this.chartData.push([
+        `Index ${i}`,
+        Math.floor(Math.random() * 100)
+      ]);
+    }
+  }
 
 interface Industry {
   code: string,

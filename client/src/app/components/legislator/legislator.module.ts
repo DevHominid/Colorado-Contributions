@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LegislatorComponent } from './legislator.component';
+import { BarChartComponent } from '../bar-chart/bar-chart.component';
 
 import { DataService } from '../../services/data.service';
 
@@ -10,7 +11,8 @@ import { DataService } from '../../services/data.service';
     CommonModule
   ],
   declarations: [
-    LegislatorComponent
+    LegislatorComponent,
+    BarChartComponent
   ],
   exports: [
     LegislatorComponent

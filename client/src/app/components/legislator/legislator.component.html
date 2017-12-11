@@ -20,6 +20,7 @@
   <article>
     <div class="container">
       <div class="chart">
+        <app-bar-chart *ngIf="chartData" [data]="chartData"></app-bar-chart>
       </div>
       <div class="btn-wrapper">
         <button class="btn-cycle" (click)="onBtnCycleClick($event)">2012</button>
