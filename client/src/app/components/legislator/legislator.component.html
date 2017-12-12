@@ -23,10 +23,7 @@
         <app-bar-chart *ngIf="chartData" [data]="chartData"></app-bar-chart>
       </div>
       <div class="btn-wrapper">
-        <button class="btn-cycle" (click)="onBtnCycleClick($event)">2012</button>
-        <button class="btn-cycle" (click)="onBtnCycleClick($event)">2014</button>
-        <button class="btn-cycle" (click)="onBtnCycleClick($event)">2016</button>
-        <button class="btn-cycle" (click)="onBtnCycleClick($event)">2018</button>
+        <button *ngFor="let btn of btnCycles" (click)="onBtnCycleClick($event, btn)" [ngClass]="{active : activeBtn === btn}">{{btn}}</button>
       </div>
       <h1>Industries</h1>
       <div *ngFor="let industry of industries; index as i">

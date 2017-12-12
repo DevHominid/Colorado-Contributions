@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-legislator',
@@ -16,7 +17,8 @@ export class LegislatorComponent implements OnInit {
   industries: Industry[];
   candInfo: CandInfo;
   private chartData: Array<any>;
-  cycles: Array<string>;
+  btnCycles: Array<string>;
+  activeBtn: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +27,9 @@ export class LegislatorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.btnCycles = ['2012', '2014', '2016', '2018'];
+    this.activeBtn = this.btnCycles[3];
+
     this.route.paramMap.switchMap((params: ParamMap) => {
       this.cid = params.get('cid');
       this.currentCycle = '2018';
@@ -42,7 +47,7 @@ export class LegislatorComponent implements OnInit {
     })
   }
 
-  onBtnCycleClick(event) {
+  onBtnCycleClick(event, btn) {
     const cycle = event.target.innerText;
     this.service.getCandIndustry(this.cid, cycle).subscribe((data) => {
       this.dataRes = data;
@@ -52,6 +57,8 @@ export class LegislatorComponent implements OnInit {
       console.log(data);
       console.log(this.industries);
       console.log(this.candInfo);
+
+      this.setBtnActive(btn);
 
       this.generateData(this.industries);
     }
@@ -65,6 +72,10 @@ export class LegislatorComponent implements OnInit {
         parseInt(industry.total)
       ]);
     });
+  }
+
+  setBtnActive(btn) {
+    this.activeBtn = btn;
   }
 }
 

@@ -65,6 +65,15 @@ article .container {
   background: #F0B67F;
   border: none;
   padding: 0.625rem 0 0.625rem 0;
+  transition: background 0.3s ease-out;
+}
+
+.btn-wrapper button:hover {
+  background: #FE5F55;
+}
+
+.btn-wrapper button.active {
+  background: #FE5F55;
 }
 
 .industry-info-wrapper {
