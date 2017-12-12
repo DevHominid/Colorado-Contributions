@@ -32,17 +32,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-// app.get('/', (req, res, next) => {
-//   const getLegislators = new OpenSecretsCall('getLegislators', { id: 'NJ' });
-//   getLegislators.fetchData()
-//     .then((data) => {
-//       res.json(data);
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
-
 // Init routing middleware
 app.use('/api', apiRouter);
 

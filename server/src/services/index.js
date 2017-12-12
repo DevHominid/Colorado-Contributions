@@ -41,7 +41,7 @@ const getLegislators = (id) => new Promise((resolve, reject) => {
  *
  * @param  {String} cid
  * @param  {String} cycle (2012, 2014, 2016, 2018)
- * @return {Promise<Object>}
+ * @return {Promise<Array>}
  */
 
  const getCandIndustry = (cid, cycle) => new Promise((resolve, reject) => {
