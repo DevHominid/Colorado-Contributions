@@ -63,7 +63,7 @@ router.get('/candidate/:cid/industries/:cycle', (req, res, next) => {
   findKeys(key)
     .then((keys) => {
       if (keys) {
-        Promise.all([findOne(`candInfo:${cid}`), findMultiple(JSON.parse(keys))])
+        Promise.all([findOne(`candInfo:${cid}${cycle}`), findMultiple(JSON.parse(keys))])
           .then((result) => {
             res.json({ 'candInfo': result[0], 'candIndustry': result[1], 'source': 'redis cache'});
           })

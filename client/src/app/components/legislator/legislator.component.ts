@@ -12,10 +12,11 @@ import 'rxjs/add/operator/switchMap';
 export class LegislatorComponent implements OnInit {
   dataRes: any;
   cid: string;
-  cycle: string;
+  currentCycle: string;
   industries: Industry[];
   candInfo: CandInfo;
   private chartData: Array<any>;
+  cycles: Array<string>;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,8 +27,8 @@ export class LegislatorComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.switchMap((params: ParamMap) => {
       this.cid = params.get('cid');
-      this.cycle = '2018';
-      return this.service.getCandIndustry(this.cid, this.cycle);
+      this.currentCycle = '2018';
+      return this.service.getCandIndustry(this.cid, this.currentCycle);
     })
     .subscribe((data) => {
       this.dataRes = data;
@@ -47,7 +48,7 @@ export class LegislatorComponent implements OnInit {
       this.dataRes = data;
       this.industries = data.candIndustry;
       this.candInfo = data.candInfo;
-      this.cycle = cycle;
+      this.currentCycle = cycle;
       console.log(data);
       console.log(this.industries);
       console.log(this.candInfo);

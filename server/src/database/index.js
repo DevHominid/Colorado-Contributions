@@ -86,10 +86,10 @@ redisClient.on('error', (err) => {
    * @return {Promise<Object>}
    */
    const cacheCandInfo = (candInfo) => new Promise((resolve, reject) => {
-     redisClient.hmset(`candInfo:${candInfo.cid}`, 'name', candInfo.name,
+     redisClient.hmset(`candInfo:${candInfo.cid}${candInfo.cycle}`, 'name', candInfo.name,
                        'cid', candInfo.cid, 'cycle', candInfo.cycle,
                        'source', candInfo.source, 'lastUpdated', candInfo.lastUpdated);
-     redisClient.expire(`candInfo:${candInfo.code}`, 300);
+     redisClient.expire(`candInfo:${candInfo.cid}${candInfo.cycle}`, 300);
      resolve(candInfo);
    });
 
@@ -104,7 +104,7 @@ redisClient.on('error', (err) => {
        redisClient.hmset(`candIndustry:${key}${industry.code}`, 'code', industry.code,
                          'name', industry.name, 'indivs', industry.indivs,
                          'pacs', industry.pacs, 'total', industry.total);
-       redisClient.expire(`candIndustry:${industry.code}`, 300);
+       redisClient.expire(`candIndustry:${key}${industry.code}`, 300);
      });
      resolve(industryArray);
    });
