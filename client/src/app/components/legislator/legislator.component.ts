@@ -37,8 +37,7 @@ export class LegislatorComponent implements OnInit {
       console.log(this.industries);
       console.log(this.candInfo);
 
-      this.generateData();
-      setInterval(() => this.generateData(), 3000);
+      this.generateData(this.industries);
     })
   }
 
@@ -52,18 +51,21 @@ export class LegislatorComponent implements OnInit {
       console.log(data);
       console.log(this.industries);
       console.log(this.candInfo);
+
+      this.generateData(this.industries);
     }
   }
 
-  generateData() {
+  generateData(industryData) {
     this.chartData = [];
-    for (let i = 0; i < (8 + Math.floor(Math.random() * 10)); i++) {
+    industryData.forEach((industry) => {
       this.chartData.push([
-        `Index ${i}`,
-        Math.floor(Math.random() * 100)
+        industry.code,
+        parseInt(industry.total)
       ]);
-    }
+    });
   }
+}
 
 interface Industry {
   code: string,
