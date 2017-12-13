@@ -6,7 +6,7 @@ import { LegislatorComponent } from '../legislator/legislator.component';
 
 const senateRoutes: Routes = [
   { path: 'senate', component: SenateComponent },
-  { path: 'senate/legislator/:cid', component: LegislatorComponent },
+  { path: 'legislator/:cid/:cycle', component: LegislatorComponent },
 ];
 
 @NgModule({

@@ -26,13 +26,13 @@ export class LegislatorComponent implements OnInit {
     private service: DataService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.btnCycles = ['2012', '2014', '2016', '2018'];
     this.activeBtn = this.btnCycles[3];
 
     this.route.paramMap.switchMap((params: ParamMap) => {
       this.cid = params.get('cid');
-      this.currentCycle = '2018';
+      this.currentCycle = params.get('cycle');
       return this.service.getCandIndustry(this.cid, this.currentCycle);
     })
     .subscribe((data) => {
@@ -47,21 +47,13 @@ export class LegislatorComponent implements OnInit {
     })
   }
 
-  onBtnCycleClick(event, btn) {
+  onBtnCycleClick(event, btn): void {
+    // Grab cycle
     const cycle = event.target.innerText;
-    this.service.getCandIndustry(this.cid, cycle).subscribe((data) => {
-      this.dataRes = data;
-      this.industries = data.candIndustry;
-      this.candInfo = data.candInfo;
-      this.currentCycle = cycle;
-      console.log(data);
-      console.log(this.industries);
-      console.log(this.candInfo);
-
-      this.setBtnActive(btn);
-
-      this.generateData(this.industries);
-    }
+    // Navigate by url
+    this.router.navigateByUrl(`/legislator/${this.cid}/${cycle}`);
+    // Set active class
+    this.setBtnActive(btn);
   }
 
   generateData(industryData) {
@@ -77,6 +69,7 @@ export class LegislatorComponent implements OnInit {
   setBtnActive(btn) {
     this.activeBtn = btn;
   }
+
 }
 
 interface Industry {
