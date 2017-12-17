@@ -27,7 +27,7 @@
       </div>
       <h1>Industries</h1>
       <div *ngFor="let industry of industries; index as i">
-        <p>{{i + 1}}) {{industry.name}}</p>
+        <p class="industry-title">{{i + 1}}) {{industry.name}}</p>
         <div class="industry-info-wrapper">
           <div>
             <p>Code: {{industry.code}}</p>

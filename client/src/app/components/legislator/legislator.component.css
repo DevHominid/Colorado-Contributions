@@ -10,12 +10,17 @@ aside {
   align-items: center;
   width: 30%;
   background: #F0B67F;
-  padding: 2.50rem 0 2.50rem 0;
+  padding: 2.50rem 0;
 }
 
 aside img {
   border-radius: 50%;
   width: 60%;
+}
+@media screen and (min-width: 62.188em) { /* 995 ÷ 16 */
+  aside img {
+    width: 150px;
+  }
 }
 
 .details-box {
@@ -34,11 +39,20 @@ aside img {
   font-weight: 700;
 }
 
+.details-value a {
+  text-decoration: none;
+  color: #FE5F55;
+}
+
+.details-value a:hover {
+  color: #C7EFCF;
+}
+
 article {
   display: flex;
   justify-content: center;
   width: 70%;
-  padding: 2.5rem 0 2.5rem 0;
+  padding: 2.50rem 0;
   overflow-y: scroll;
   background: #EEF5DB;
 }
@@ -74,6 +88,12 @@ article .container {
 
 .btn-wrapper button.active {
   background: #FE5F55;
+  color: #FFF;
+}
+
+.industry-title {
+  font-weight: 700;
+  margin-bottom: 0;
 }
 
 .industry-info-wrapper {
