@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
+import compression from 'compression';
 import 'babel-polyfill';
 import axios from 'axios';
 import OpenSecretsCall from '../opensecrets-api';
@@ -13,6 +14,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 
+// Use gzip compression & helmet
+app.use(compression());
 app.use(helmet());
 
 // Enable CORS
