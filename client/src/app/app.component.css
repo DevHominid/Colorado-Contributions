@@ -19,9 +19,14 @@ header nav li {
 }
 
 header nav li a {
-  font-size: 2.25em; /* 36 ÷ 16 */
+  font-size: 1.75em; /* 28 ÷ 16 */
   text-decoration: none;
   color: #011638;
+  transition: 0.3s ease-out;
+}
+
+header nav li a:hover {
+  color: #FE5F55;
 }
 
 .section-center {
@@ -60,15 +65,15 @@ footer div {
 }
 
 footer div span {
-  font-size: 2.25em; /* 36 ÷ 16 */
+  font-size: 1.75em; /* 28 ÷ 16 */
 }
 
 .signature {
-  width: 200px;
+  width: 160px;
   margin-left: 2.500rem; /* 40 ÷ 16 */
 }
 
 .credit {
-  width: 160px;
+  width: 130px;
   margin-right: 2.500rem; /* 40 ÷ 16 */
 }
