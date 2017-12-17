@@ -43,7 +43,8 @@ app.use('/api', apiRouter);
 
 // Init error logging middleware
 app.use((err, req, res, next) => {
-  console.log(`Error: \nMessage: ${err.message}`);
+  console.error(`Error: \nMessage: ${err.message}`);
+  res.status(500).send('Something went wrong!');
 });
 
 app.listen(port, () => console.log(`Server started on port: ${port}`));
