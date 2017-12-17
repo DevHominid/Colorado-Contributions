@@ -44,6 +44,11 @@ aside {
 aside i {
   margin-top: 2.500rem; /* 40 ÷ 16 */
   color: #FE5F55;
+  transition: 0.3s ease-out;
+}
+
+aside i:hover {
+  color: #C7EFCF;
 }
 
 footer {

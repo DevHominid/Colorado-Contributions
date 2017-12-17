@@ -61,12 +61,11 @@ body {
   height: 150px;
   background: #C7EFCF;
   opacity: .64;
-  transition: all 0.7s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .legis-box:hover .legis-img::after {
   height: 0px;
-  width: 0%;
 }
 
 .legis-info {
@@ -84,7 +83,7 @@ body {
   left: 0;
   bottom: 0;
   background: #F0B67F;
-  transition: width 0.7s ease-out;
+  transition: width 0.5s ease-out;
 }
 
 .legis-box:hover .legis-info::after {
@@ -114,4 +113,17 @@ body {
   letter-spacing: 40px;
   color: #EEF5DB;
   font-weight: 400;
+  animation: slide-right 0.7s;
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    left: -100%;
+  }
+
+  to {
+    opacity: 0.5;
+    left: 0;
+  }
 }
