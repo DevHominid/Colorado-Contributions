@@ -13,41 +13,55 @@ import { getLegislators, getCandIndustry } from '../services';
 const router = express.Router();
 
 // Fetch legislators keys from cache
-// if keys found, fetch legislators from cache and send res
-// else, fetch legislators + keys from API, store in cache, and send res
+// if keys found, fetch legislators from cache and send in res
+// else, fetch legislators + keys from API, store in cache, and send in res
 router.get('/legislators/:id', (req, res, next) => {
   const id = req.params.id;
 
+  // Check for legislator keys in redis cache by id (state i.e. 'CO')
   findKeys(id)
     .then((keys) => {
-      let method;
+      let source;
 
       if (keys) {
-        method = 'redis cache';
+        // Keys found, define source
+        source = 'redis cache';
 
-        return Promise.all([findMultiple(JSON.parse(keys)), method]);
+        // Fetch each legislator from redis cache by key
+        return Promise.all([findMultiple(JSON.parse(keys)), source]);
       } else {
+        // Keys not found, define query and source
         const query = { id: id };
-        method = 'opensecrets api';
+        source = 'opensecrets api';
 
-        return Promise.all([getLegislators(query), method]);
+        // Fetch legislators from opensecrets api by id (state i.e. 'CO')
+        return Promise.all([getLegislators(query), source]);
       }
     })
     .then((result) => {
       const legislators = result[0];
       const source = result[1];
 
+      // Check data source
       if (source === 'redis cache') {
+        // Send legislator data as JSON object (array, string)
         res.json({ 'legislators': legislators, 'source': source});
       } else if (source === 'opensecrets api') {
+        // Cache legislators and their respective keys
         return Promise.all([cacheLegislators(legislators[1]), cacheKeys(id, legislators[0]), source])
       }
     })
     .then((result) => {
-      const legislators = result[0];
-      const source = result[2];
+      // Check for result
+      if (result) {
+        const legislators = result[0];
+        const source = result[2];
 
-      res.json({'legislators': result[0], 'source': source});
+        // Send legislator data as JSON object (array, string)
+        res.json({'legislators': result[0], 'source': source});
+      } else {
+        return;
+      }
     })
     .catch((err) => {
       res.status(500).send(err.message);
