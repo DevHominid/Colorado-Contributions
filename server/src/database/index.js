@@ -35,7 +35,7 @@ redisClient.on('error', (err) => {
  * Fetch multiple objects from the cache by keys
  *
  * @param  {Array} keys
- * @return {Promise<Object>}
+ * @return {Promise<Array>}
  */
  const findMultiple = (keys) => new Promise((resolve, reject) => {
    const items = Promise.all(keys.map((key) => {
