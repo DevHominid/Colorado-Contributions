@@ -1,10 +1,13 @@
 import redis from 'redis';
-// let cache = new (require('node-redis-cache'))();
 
 // Create new redis client and connect to redis instance
-const redisClient = redis.createClient();
-redisClient.on('error', (err) => {
-  console.log(`Error: ${err}`);
+const redisClient = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOSTNAME,
+                                       {no_ready_check: true});
+redisClient.auth(process.env.REDIS_PASS, (err) => {
+  if (err) throw err;
+});
+redisClient.on('connect', () => {
+  console.log(`Connected to Redis`);
 });
 
 /**
